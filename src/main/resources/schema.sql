@@ -1,0 +1,36 @@
+CREATE TABLE IF NOT EXISTS accounts (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  account_number VARCHAR(50) UNIQUE NOT NULL,
+  type VARCHAR(20) NOT NULL,
+  balance DECIMAL(18,2) NOT NULL,
+  annual_interest_rate DECIMAL(5,4) NOT NULL DEFAULT 0.0200,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS processed_transactions (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  account_number VARCHAR(50) NOT NULL,
+  txn_date DATE NOT NULL,
+  amount DECIMAL(18,2) NOT NULL,
+  category VARCHAR(50),
+  anomaly BOOLEAN NOT NULL,
+  message VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS interest_ledger (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  account_number VARCHAR(50) NOT NULL,
+  period_yyyymm VARCHAR(7) NOT NULL,
+  interest_amount DECIMAL(18,2) NOT NULL,
+  new_balance DECIMAL(18,2) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS annual_statement (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  account_number VARCHAR(50) NOT NULL,
+  year INT NOT NULL,
+  total_deposits DECIMAL(18,2) NOT NULL,
+  total_withdrawals DECIMAL(18,2) NOT NULL,
+  end_balance DECIMAL(18,2) NOT NULL,
+  generated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

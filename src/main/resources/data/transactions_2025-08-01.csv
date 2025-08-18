@@ -1,0 +1,6 @@
+id,fecha,monto,tipo
+1,2025-08-01,50000,credito
+2,2025-08-01,-3000,debito
+3,2025-08-01,-15000,debito
+4,2025-08-01,1000,credito
+5,2025-08-01,abc,debito

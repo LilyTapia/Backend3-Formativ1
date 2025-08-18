@@ -1,0 +1,77 @@
+legacy:
+  files:
+    # Archivo CSV del sistema legacy del banco (formato: id,fecha,monto,tipo)
+    daily-transactions-file: transactions_2025-08-01.csv
+    interest-file: intereses.csv
+    annual-accounts-file: cuentas_anuales.csv
+
+  # Mapea columnas del sistema legacy
+  columns:
+    # Nombres de columnas en el CSV legacy
+    id: id
+    fecha: fecha
+    monto: monto
+    tipo: tipo
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:banco;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.batch: INFO
+    com.banco.batch: INFO
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  datasource:
+    url: jdbc:mysql://localhost:3306/banco_batch?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+---
+spring:
+  config:
+    activate:
+      on-profile: postgresql
+  datasource:
+    url: jdbc:postgresql://localhost:5432/banco_batch
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
