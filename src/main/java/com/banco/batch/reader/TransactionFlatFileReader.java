@@ -19,8 +19,14 @@ public class TransactionFlatFileReader {
     private final LegacyCsvProperties props;
 
     public FlatFileItemReader<TransactionRecord> build(String fileName) {
-        // Nombres de columnas del CSV legacy: id, fecha, monto, tipo
-        String[] legacyNames = new String[] {"id", "fecha", "monto", "tipo"};
+        // Obtener nombres de columnas desde application.yml (legacy.columns.*)
+        LegacyCsvProperties.Columns columns = props.getColumns();
+        String[] legacyNames = new String[] {
+            columns.getId(),
+            columns.getFecha(),
+            columns.getMonto(),
+            columns.getTipo()
+        };
 
         return new FlatFileItemReaderBuilder<TransactionRecord>()
                 .name("transactionReader")
@@ -29,10 +35,10 @@ public class TransactionFlatFileReader {
                 .names(legacyNames)
                 .fieldSetMapper(fieldSet -> {
                     TransactionRecord tr = new TransactionRecord();
-                    tr.setId(fieldSet.readString("id"));
-                    tr.setFecha(fieldSet.readString("fecha"));
-                    tr.setMonto(fieldSet.readString("monto"));
-                    tr.setTipo(fieldSet.readString("tipo"));
+                    tr.setId(fieldSet.readString(columns.getId()));
+                    tr.setFecha(fieldSet.readString(columns.getFecha()));
+                    tr.setMonto(fieldSet.readString(columns.getMonto()));
+                    tr.setTipo(fieldSet.readString(columns.getTipo()));
                     return tr;
                 })
                 .linesToSkip(1)

@@ -10,7 +10,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
-        show_sql: false
+        '[show_sql]': false
   batch:
     job:
       enabled: false
@@ -28,6 +28,6 @@ legacy:
 
 logging:
   level:
-    org.springframework.batch: WARN
-    com.banco.batch: DEBUG
-    org.hibernate.SQL: WARN
+    '[org.springframework.batch]': WARN
+    '[com.banco.batch]': DEBUG
+    '[org.hibernate.SQL]': WARN
