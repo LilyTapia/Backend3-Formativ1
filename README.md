@@ -162,20 +162,6 @@ El proyecto incluye archivos CSV de prueba:
 - `transactions_2025-08-02.csv` - Datos adicionales válidos
 - `transactions_test_errors.csv` - Datos con errores para testing
 
-## 📊 Monitoreo y Logging
-
-### Configuración de Logs
-
-Los logs están configurados para mostrar:
-- Información de ejecución de jobs
-- Detalles de anomalías detectadas
-- Métricas de rendimiento
-- Errores y excepciones
-
-### Niveles de Log por Componente:
-- `com.banco.batch`: INFO/DEBUG
-- `org.springframework.batch`: INFO
-- `org.hibernate.SQL`: WARN (en producción)
 
 ## 🗄️ Esquema de Base de Datos
 
@@ -196,25 +182,6 @@ Los logs están configurados para mostrar:
 #### `annual_statement`
 - Estados de cuenta anuales generados
 
-## 🔧 Configuración Avanzada
-
-### Personalizar Validaciones
-
-Para agregar nuevas validaciones, editar:
-```java
-src/main/java/com/banco/batch/processor/DailyTransactionProcessor.java
-```
-
-### Configurar Nuevas Fuentes de Datos
-
-Editar `application.yml` para agregar nuevos perfiles de base de datos.
-
-### Ajustar Tamaños de Chunk
-
-Modificar el tamaño de chunk en las configuraciones de jobs:
-```java
-.chunk(100, txManager) // Procesar 100 registros por vez
-```
 
 ## 🚨 Manejo de Errores
 
@@ -233,29 +200,6 @@ Modificar el tamaño de chunk en las configuraciones de jobs:
 - Fechas inválidas o futuras
 - Categorías no reconocidas
 - Violaciones de reglas de negocio
-
-## 📈 Rendimiento
-
-### Optimizaciones Implementadas:
-
-- Procesamiento por chunks para mejor rendimiento
-- Conexiones de base de datos optimizadas
-- Logging asíncrono
-- Validaciones eficientes
-
-### Métricas Típicas:
-
-- **Throughput**: ~1000 transacciones/segundo
-- **Memory Usage**: <512MB para 100K registros
-- **Error Rate**: <1% en datos típicos
-
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crear feature branch (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit cambios (`git commit -am 'Agregar nueva funcionalidad'`)
-4. Push al branch (`git push origin feature/nueva-funcionalidad`)
-5. Crear Pull Request
 
 ## 📝 Licencia
 
