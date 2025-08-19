@@ -1,0 +1,65 @@
+{
+  "groups": [
+    {
+      "name": "legacy",
+      "type": "com.banco.batch.config.LegacyCsvProperties",
+      "description": "Configuration properties for legacy CSV file processing"
+    },
+    {
+      "name": "legacy.files",
+      "type": "com.banco.batch.config.LegacyCsvProperties$Files",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties",
+      "description": "Legacy CSV file names configuration"
+    },
+    {
+      "name": "legacy.columns",
+      "type": "com.banco.batch.config.LegacyCsvProperties$Columns",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties",
+      "description": "Legacy CSV column names mapping"
+    }
+  ],
+  "properties": [
+    {
+      "name": "legacy.files.daily-transactions-file",
+      "type": "java.lang.String",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties$Files",
+      "description": "Name of the daily transactions CSV file from the legacy system"
+    },
+    {
+      "name": "legacy.files.interest-file",
+      "type": "java.lang.String",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties$Files",
+      "description": "Name of the interest CSV file from the legacy system"
+    },
+    {
+      "name": "legacy.files.annual-accounts-file",
+      "type": "java.lang.String",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties$Files",
+      "description": "Name of the annual accounts CSV file from the legacy system"
+    },
+    {
+      "name": "legacy.columns.id",
+      "type": "java.lang.String",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties$Columns",
+      "description": "Column name for ID in the legacy CSV"
+    },
+    {
+      "name": "legacy.columns.fecha",
+      "type": "java.lang.String",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties$Columns",
+      "description": "Column name for date in the legacy CSV"
+    },
+    {
+      "name": "legacy.columns.monto",
+      "type": "java.lang.String",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties$Columns",
+      "description": "Column name for amount in the legacy CSV"
+    },
+    {
+      "name": "legacy.columns.tipo",
+      "type": "java.lang.String",
+      "sourceType": "com.banco.batch.config.LegacyCsvProperties$Columns",
+      "description": "Column name for type in the legacy CSV"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+# Custom configuration for legacy CSV file processing
+# This property is defined in LegacyCsvProperties.java with @ConfigurationProperties(prefix = "legacy")
 legacy:
   files:
     # Archivo CSV del sistema legacy del banco (formato: id,fecha,monto,tipo)
@@ -36,8 +38,8 @@ server:
 
 logging:
   level:
-    org.springframework.batch: INFO
-    com.banco.batch: INFO
+    '[org.springframework.batch]': INFO
+    '[com.banco.batch]': INFO
 
 ---
 spring:
@@ -74,4 +76,4 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc:
           lob:
-            non_contextual_creation: true
+            '[non_contextual_creation]': true
