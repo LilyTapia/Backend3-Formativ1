@@ -263,9 +263,8 @@ Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 
 ## 📞 Soporte
 
-Para soporte técnico o preguntas:
-- Crear issue en GitHub
-- Contactar al equipo de desarrollo
+Para soporte técnico o preguntas a:
+- Seba & Lily
 
 ---
 
