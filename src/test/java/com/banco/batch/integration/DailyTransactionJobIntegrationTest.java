@@ -53,24 +53,88 @@ class DailyTransactionJobIntegrationTest {
         jobRepositoryTestUtils.removeJobExecutions();
         processedTransactionRepository.deleteAll();
         
-        // Setup test accounts
+        // Setup test accounts that match the CSV data
         accountRepository.deleteAll();
-        Account account1 = Account.builder()
-                .accountNumber("ACC-1001")
+        Account account101 = Account.builder()
+                .accountNumber("101")
                 .type("SAVINGS")
                 .balance(150000.0)
                 .annualInterestRate(0.03)
                 .build();
-        
-        Account account2 = Account.builder()
-                .accountNumber("ACC-2001")
+
+        Account account102 = Account.builder()
+                .accountNumber("102")
+                .type("SAVINGS")
+                .balance(50000.0)
+                .annualInterestRate(0.03)
+                .build();
+
+        Account account103 = Account.builder()
+                .accountNumber("103")
+                .type("SAVINGS")
+                .balance(25000.0)
+                .annualInterestRate(0.03)
+                .build();
+
+        Account account201 = Account.builder()
+                .accountNumber("201")
                 .type("LOAN")
                 .balance(-500000.0)
                 .annualInterestRate(0.12)
                 .build();
-        
-        accountRepository.save(account1);
-        accountRepository.save(account2);
+
+        Account account202 = Account.builder()
+                .accountNumber("202")
+                .type("LOAN")
+                .balance(-300000.0)
+                .annualInterestRate(0.12)
+                .build();
+
+        Account account104 = Account.builder()
+                .accountNumber("104")
+                .type("SAVINGS")
+                .balance(10000.0)
+                .annualInterestRate(0.03)
+                .build();
+
+        Account account105 = Account.builder()
+                .accountNumber("105")
+                .type("SAVINGS")
+                .balance(5000.0)
+                .annualInterestRate(0.03)
+                .build();
+
+        Account account106 = Account.builder()
+                .accountNumber("106")
+                .type("SAVINGS")
+                .balance(15000.0)
+                .annualInterestRate(0.03)
+                .build();
+
+        Account account203 = Account.builder()
+                .accountNumber("203")
+                .type("LOAN")
+                .balance(-100000.0)
+                .annualInterestRate(0.12)
+                .build();
+
+        Account account204 = Account.builder()
+                .accountNumber("204")
+                .type("LOAN")
+                .balance(-50000.0)
+                .annualInterestRate(0.12)
+                .build();
+
+        accountRepository.save(account101);
+        accountRepository.save(account102);
+        accountRepository.save(account103);
+        accountRepository.save(account201);
+        accountRepository.save(account202);
+        accountRepository.save(account104);
+        accountRepository.save(account105);
+        accountRepository.save(account106);
+        accountRepository.save(account203);
+        accountRepository.save(account204);
         
         jobLauncherTestUtils.setJob(dailyTransactionsReportJob);
     }

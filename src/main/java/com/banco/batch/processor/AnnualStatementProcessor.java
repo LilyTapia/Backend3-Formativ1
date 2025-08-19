@@ -25,16 +25,16 @@ public class AnnualStatementProcessor implements ItemProcessor<Account, AnnualSt
 
     @Override
     public AnnualStatement process(Account acc) {
-        var start = Date.valueOf(LocalDate.of(targetYear, 1, 1));
-        var end   = Date.valueOf(LocalDate.of(targetYear, 12, 31));
+        Date start = Date.valueOf(LocalDate.of(targetYear, 1, 1));
+        Date end = Date.valueOf(LocalDate.of(targetYear, 12, 31));
 
-        var txns = txnRepo.findByAccountNumberAndTxnDateBetween(
+        java.util.List<com.banco.batch.model.ProcessedTransaction> txns = txnRepo.findByAccountNumberAndTxnDateBetween(
                 acc.getAccountNumber(), start, end);
 
         double deposits = txns.stream().mapToDouble(t -> Math.max(0, t.getAmount())).sum();
         double withdrawals = txns.stream().mapToDouble(t -> Math.min(0, t.getAmount())).sum();
 
-        return com.banco.batch.model.AnnualStatement.builder()
+        return AnnualStatement.builder()
                 .accountNumber(acc.getAccountNumber())
                 .year(targetYear)
                 .totalDeposits(round2(deposits))

@@ -1,8 +1,5 @@
 package com.banco.batch.config;
 
-import com.banco.batch.config.LegacyCsvProperties;
-import com.banco.batch.listener.JobExecutionListener;
-import com.banco.batch.listener.StepExecutionListener;
 import com.banco.batch.model.ProcessedTransaction;
 import com.banco.batch.model.TransactionRecord;
 import com.banco.batch.processor.DailyTransactionProcessor;
@@ -16,6 +13,7 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,8 +30,6 @@ public class JobDailyTransactionsConfig {
     private final DailyTransactionProcessor processor;
     private final ProcessedTransactionWriter writer;
     private final LegacyCsvProperties legacyProps;
-    private final JobExecutionListener jobExecutionListener;
-    private final StepExecutionListener stepExecutionListener;
 
     @Bean
     @StepScope
@@ -57,16 +53,14 @@ public class JobDailyTransactionsConfig {
                 .faultTolerant()
                 .skip(Exception.class)
                 .skipLimit(50)
-                .listener(stepExecutionListener)
                 .build();
     }
 
     @Bean
     public Job dailyTransactionsReportJob(JobRepository jobRepository,
-                                          Step dailyTransactionsStep) {
+                                          @Qualifier("dailyTransactionsStep") Step dailyTransactionsStep) {
         return new JobBuilder("dailyTransactionsReportJob", jobRepository)
                 .start(dailyTransactionsStep)
-                .listener(jobExecutionListener)
                 .build();
     }
 }

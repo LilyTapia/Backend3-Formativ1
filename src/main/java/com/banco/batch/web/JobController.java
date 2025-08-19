@@ -1,10 +1,10 @@
 package com.banco.batch.web;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,13 +13,22 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/jobs")
-@RequiredArgsConstructor
 public class JobController {
 
     private final JobLauncher jobLauncher;
     private final Job dailyTransactionsReportJob;
     private final Job monthlyInterestJob;
     private final Job annualStatementJob;
+
+    public JobController(JobLauncher jobLauncher,
+                        @Qualifier("dailyTransactionsReportJob") Job dailyTransactionsReportJob,
+                        @Qualifier("monthlyInterestJob") Job monthlyInterestJob,
+                        @Qualifier("annualStatementJob") Job annualStatementJob) {
+        this.jobLauncher = jobLauncher;
+        this.dailyTransactionsReportJob = dailyTransactionsReportJob;
+        this.monthlyInterestJob = monthlyInterestJob;
+        this.annualStatementJob = annualStatementJob;
+    }
 
     @PostMapping("/daily")
     public String runDaily(@RequestParam(required = false) String date) throws Exception {

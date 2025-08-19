@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS interest_ledger (
 CREATE TABLE IF NOT EXISTS annual_statement (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   account_number VARCHAR(50) NOT NULL,
-  year INT NOT NULL,
+  "year" INT NOT NULL,
   total_deposits DECIMAL(18,2) NOT NULL,
   total_withdrawals DECIMAL(18,2) NOT NULL,
   end_balance DECIMAL(18,2) NOT NULL,

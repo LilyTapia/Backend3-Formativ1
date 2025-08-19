@@ -15,6 +15,7 @@ public class AnnualStatement {
     @Column(name = "account_number")
     private String accountNumber;
 
+    @Column(name = "`year`")
     private Integer year;
 
     @Column(name = "total_deposits")
